@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>AdapterConsole.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Patrones Restaurante</a> &gt; <a href="index.source.html" class="el_package">Estructurales.Adapter.vista</a> &gt; <span class="el_source">AdapterConsole.java</span></div><h1>AdapterConsole.java</h1><pre class="source lang-java linenums">package Estructurales.Adapter.vista;
+
+import Estructurales.Adapter.controlador.AdapterController;
+import java.util.Scanner;
+
+<span class="nc" id="L6">public class AdapterConsole {</span>
+
+    public static void main(String[] args) {
+<span class="nc" id="L9">        Scanner sc = new Scanner(System.in);</span>
+<span class="nc" id="L10">        AdapterController controller = new AdapterController();</span>
+
+<span class="nc" id="L12">        System.out.println(&quot;=== PATRÓN ADAPTER - SISTEMA DE PAGOS ===&quot;);</span>
+
+<span class="nc" id="L14">        boolean continuar = true;</span>
+<span class="nc bnc" id="L15" title="All 2 branches missed.">        while (continuar) {</span>
+<span class="nc" id="L16">            System.out.println(&quot;\n--- MENÚ PRINCIPAL ---&quot;);</span>
+<span class="nc" id="L17">            System.out.println(&quot;1. Realizar pago&quot;);</span>
+<span class="nc" id="L18">            System.out.println(&quot;2. Ver historial de pagos&quot;);</span>
+<span class="nc" id="L19">            System.out.println(&quot;3. Simular múltiples pagos (automático)&quot;);</span>
+<span class="nc" id="L20">            System.out.println(&quot;4. Salir&quot;);</span>
+<span class="nc" id="L21">            System.out.print(&quot;Seleccione una opción: &quot;);</span>
+
+<span class="nc" id="L23">            String opcion = sc.nextLine();</span>
+
+<span class="nc bnc" id="L25" title="All 5 branches missed.">            switch (opcion) {</span>
+                case &quot;1&quot; -&gt; {
+<span class="nc" id="L27">                    System.out.print(&quot;Ingrese nombre del cliente: &quot;);</span>
+<span class="nc" id="L28">                    String cliente = sc.nextLine();</span>
+
+<span class="nc" id="L30">                    System.out.print(&quot;Ingrese el monto a pagar: &quot;);</span>
+                    double monto;
+                    try {
+<span class="nc" id="L33">                        monto = Double.parseDouble(sc.nextLine());</span>
+<span class="nc" id="L34">                    } catch (NumberFormatException e) {</span>
+<span class="nc" id="L35">                        System.out.println(&quot;Monto inválido. Intente nuevamente.&quot;);</span>
+<span class="nc" id="L36">                        continue;</span>
+                    }
+
+<span class="nc" id="L39">                    System.out.println(&quot;\nSeleccione método de pago:&quot;);</span>
+<span class="nc" id="L40">                    System.out.println(&quot;1. Transferencia bancaria&quot;);</span>
+<span class="nc" id="L41">                    System.out.println(&quot;2. Tarjeta de crédito&quot;);</span>
+<span class="nc" id="L42">                    System.out.println(&quot;3. Efectivo&quot;);</span>
+<span class="nc" id="L43">                    System.out.print(&quot;Opción: &quot;);</span>
+<span class="nc" id="L44">                    String metodoOpcion = sc.nextLine();</span>
+
+<span class="nc bnc" id="L46" title="All 4 branches missed.">                    String metodo = switch (metodoOpcion) {</span>
+<span class="nc" id="L47">                        case &quot;1&quot; -&gt; &quot;transferencia&quot;;</span>
+<span class="nc" id="L48">                        case &quot;2&quot; -&gt; &quot;tarjeta&quot;;</span>
+<span class="nc" id="L49">                        case &quot;3&quot; -&gt; &quot;efectivo&quot;;</span>
+<span class="nc" id="L50">                        default -&gt; &quot;desconocido&quot;;</span>
+                    };
+
+<span class="nc" id="L53">                    System.out.println(&quot;\nProcesando pago...&quot;);</span>
+<span class="nc" id="L54">                    boolean exito = controller.realizarPago(cliente, monto, metodo);</span>
+
+<span class="nc bnc" id="L56" title="All 2 branches missed.">                    if (exito) {</span>
+<span class="nc" id="L57">                        System.out.println(&quot;Pago realizado correctamente por &quot; + metodo);</span>
+<span class="nc" id="L58">                    } else {</span>
+<span class="nc" id="L59">                        System.out.println(&quot;Error al procesar el pago con &quot; + metodo);</span>
+                    }
+                }
+
+<span class="nc" id="L63">                case &quot;2&quot; -&gt; controller.mostrarHistorial();</span>
+
+                case &quot;3&quot; -&gt; {
+<span class="nc" id="L66">                    System.out.println(&quot;\nSimulando pagos automáticos...&quot;);</span>
+<span class="nc" id="L67">                    controller.ejecutarPagos();</span>
+                }
+
+                case &quot;4&quot; -&gt; {
+<span class="nc" id="L71">                    continuar = false;</span>
+<span class="nc" id="L72">                    System.out.println(&quot;Saliendo del sistema de pagos...&quot;);</span>
+                }
+
+<span class="nc" id="L75">                default -&gt; System.out.println(&quot;Opción inválida. Intente nuevamente.&quot;);</span>
+            }
+
+<span class="nc bnc" id="L78" title="All 2 branches missed.">            if (continuar) {</span>
+<span class="nc" id="L79">                System.out.println(&quot;\nPresione ENTER para continuar...&quot;);</span>
+<span class="nc" id="L80">                sc.nextLine();</span>
+            }
+        }
+
+<span class="nc" id="L84">        sc.close();</span>
+<span class="nc" id="L85">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

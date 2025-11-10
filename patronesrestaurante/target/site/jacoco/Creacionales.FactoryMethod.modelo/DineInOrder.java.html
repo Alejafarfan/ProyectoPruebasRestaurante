@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>DineInOrder.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Patrones Restaurante</a> &gt; <a href="index.source.html" class="el_package">Creacionales.FactoryMethod.modelo</a> &gt; <span class="el_source">DineInOrder.java</span></div><h1>DineInOrder.java</h1><pre class="source lang-java linenums">package Creacionales.FactoryMethod.modelo;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class DineInOrder implements Order {
+    private final String name;
+<span class="fc" id="L8">    private final List&lt;String&gt; items = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L9">    private double total = 0.0;</span>
+    private final KitchenService kitchen;
+
+<span class="fc" id="L12">    public DineInOrder(String name, KitchenService kitchen) {</span>
+<span class="fc" id="L13">        this.name = name;</span>
+<span class="fc" id="L14">        this.kitchen = kitchen;</span>
+<span class="fc" id="L15">    }</span>
+
+    @Override
+<span class="nc" id="L18">    public String getName() { return name; }</span>
+
+    @Override
+<span class="fc" id="L21">    public double getPrice() { return total; }</span>
+
+    @Override
+<span class="fc" id="L24">    public String getType() { return &quot;DINE_IN&quot;; }</span>
+
+    @Override
+<span class="fc" id="L27">    public void prepare() { kitchen.prepareOrder(this); }</span>
+
+    @Override
+    public void deliver() {
+<span class="nc" id="L31">        System.out.println(&quot;Delivering to table: &quot; + name);</span>
+<span class="nc" id="L32">    }</span>
+
+    @Override
+    public void addItem(String name, double price) {
+<span class="fc" id="L36">        items.add(name);</span>
+<span class="fc" id="L37">        total += price;</span>
+<span class="fc" id="L38">    }</span>
+
+    @Override
+<span class="nc" id="L41">    public List&lt;String&gt; getItems() { return new ArrayList&lt;&gt;(items); }</span>
+
+    @Override
+    public String toString() {
+<span class="nc" id="L45">        return &quot;DineInOrder{&quot; + &quot;name='&quot; + name + '\'' + &quot;, total=&quot; + total + '}';</span>
+    }
+
+}
+
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

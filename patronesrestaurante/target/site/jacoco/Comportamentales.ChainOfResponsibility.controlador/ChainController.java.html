@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ChainController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Patrones Restaurante</a> &gt; <a href="index.source.html" class="el_package">Comportamentales.ChainOfResponsibility.controlador</a> &gt; <span class="el_source">ChainController.java</span></div><h1>ChainController.java</h1><pre class="source lang-java linenums">package Comportamentales.ChainOfResponsibility.controlador;
+
+import Comportamentales.ChainOfResponsibility.modelo.*;
+
+public class ChainController {
+
+    private final Waiter waiter;
+    private final Chef chef;
+    private final Administrator admin;
+    private final Client client;
+
+<span class="nc" id="L12">    public ChainController() {</span>
+<span class="nc" id="L13">        waiter = new Waiter(&quot;Laura&quot;, &quot;Zona A&quot;);</span>
+<span class="nc" id="L14">        chef = new Chef(&quot;Andrés&quot;, &quot;Comida típica&quot;);</span>
+<span class="nc" id="L15">        admin = new Administrator(&quot;Lucía&quot;, &quot;Tarde&quot;);</span>
+
+        // Cadena de responsabilidad: Waiter → Chef → Admin
+<span class="nc" id="L18">        waiter.setNext(chef);</span>
+<span class="nc" id="L19">        chef.setNext(admin);</span>
+
+<span class="nc" id="L21">        client = new Client(&quot;Carlos&quot;, waiter);</span>
+<span class="nc" id="L22">    }</span>
+
+    public void ejecutarFlujo() {
+<span class="nc" id="L25">        client.makeRequest(&quot;order&quot;, &quot;Una bandeja paisa&quot;);</span>
+<span class="nc" id="L26">        client.makeRequest(&quot;cook&quot;, &quot;Preparar la bandeja paisa&quot;);</span>
+<span class="nc" id="L27">        client.makeRequest(&quot;admin&quot;, &quot;Registrar queja del cliente&quot;);</span>
+<span class="nc" id="L28">    }</span>
+
+    public Client getClient() {
+<span class="nc" id="L31">        return client;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

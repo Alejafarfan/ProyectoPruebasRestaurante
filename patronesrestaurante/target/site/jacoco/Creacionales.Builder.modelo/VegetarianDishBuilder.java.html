@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>VegetarianDishBuilder.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Patrones Restaurante</a> &gt; <a href="index.source.html" class="el_package">Creacionales.Builder.modelo</a> &gt; <span class="el_source">VegetarianDishBuilder.java</span></div><h1>VegetarianDishBuilder.java</h1><pre class="source lang-java linenums">package Creacionales.Builder.modelo;
+
+<span class="fc" id="L3">public class VegetarianDishBuilder extends DishBuilder {</span>
+
+    @Override
+    public void buildName() {
+<span class="fc" id="L7">        dish.setName(&quot;Menú Vegetariano&quot;);</span>
+<span class="fc" id="L8">    }</span>
+
+    @Override
+    public void buildMainIngredient() {
+<span class="fc" id="L12">        dish.setMainIngredient(&quot;Tofu con verduras salteadas&quot;);</span>
+<span class="fc" id="L13">    }</span>
+
+    @Override
+    public void buildSideIngredients() {
+<span class="fc" id="L17">        dish.addSideIngredient(&quot;Arroz integral&quot;);</span>
+<span class="fc" id="L18">        dish.addSideIngredient(&quot;Ensalada fresca&quot;);</span>
+<span class="fc" id="L19">    }</span>
+
+    @Override
+    public void buildDrink() {
+<span class="fc" id="L23">        dish.setDrink(&quot;Jugo natural de naranja&quot;);</span>
+<span class="fc" id="L24">    }</span>
+
+    @Override
+    public void buildPrice() {
+<span class="fc" id="L28">        dish.setPrice(18000);</span>
+<span class="fc" id="L29">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

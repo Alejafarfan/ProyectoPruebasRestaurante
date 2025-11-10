@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Kitchen.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Patrones Restaurante</a> &gt; <a href="index.source.html" class="el_package">Estructurales.Proxy.modelo</a> &gt; <span class="el_source">Kitchen.java</span></div><h1>Kitchen.java</h1><pre class="source lang-java linenums">package Estructurales.Proxy.modelo;
+
+public class Kitchen implements KitchenService {
+    private final String chefName;
+    private final int preparationTime;
+    private final String specialty;
+
+
+<span class="fc" id="L9">    public Kitchen(String chefName, int preparationTime, String specialty) {</span>
+<span class="fc" id="L10">        this.chefName = chefName;</span>
+<span class="fc" id="L11">        this.preparationTime = preparationTime;</span>
+<span class="fc" id="L12">        this.specialty = specialty;</span>
+<span class="fc" id="L13">    }</span>
+        public String prepareDish(String dishName) {
+<span class="fc" id="L15">        return &quot;Dish prepared: &quot; + dishName + &quot; by chef &quot; + chefName;</span>
+    }
+
+    @Override
+    public void prepareOrder(String dish) {
+<span class="fc" id="L20">        System.out.println(&quot;El chef &quot; + chefName + &quot; está preparando la orden &quot; + dish +</span>
+<span class="fc" id="L21">                           &quot; (especialidad: &quot; + specialty + &quot;)&quot;);</span>
+        try {
+<span class="fc" id="L23">            Thread.sleep(preparationTime * 100L);</span>
+<span class="pc" id="L24">        } catch (InterruptedException e) {</span>
+<span class="nc" id="L25">            Thread.currentThread().interrupt();</span>
+        }
+<span class="fc" id="L27">        System.out.println(&quot;El chef avisa que la orden de &quot; + dish + &quot; está lista.&quot;);</span>
+<span class="fc" id="L28">    }</span>
+
+<span class="nc" id="L30">    public String getChefName() { return chefName; }</span>
+<span class="nc" id="L31">    public int getPreparationTime() { return preparationTime; }</span>
+<span class="nc" id="L32">    public String getSpecialty() { return specialty; }</span>
+}
+
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

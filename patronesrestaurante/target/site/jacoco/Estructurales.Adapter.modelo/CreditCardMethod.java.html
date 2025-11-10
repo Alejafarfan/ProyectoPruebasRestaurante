@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CreditCardMethod.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Patrones Restaurante</a> &gt; <a href="index.source.html" class="el_package">Estructurales.Adapter.modelo</a> &gt; <span class="el_source">CreditCardMethod.java</span></div><h1>CreditCardMethod.java</h1><pre class="source lang-java linenums">package Estructurales.Adapter.modelo;
+
+public class CreditCardMethod {
+    private final String cardHolderName;
+    private final String cardNumber;
+    private final String securityCode;
+    private final int expirationMonth;
+    private final int expirationYear;
+
+<span class="fc" id="L10">    public CreditCardMethod(String cardHolderName, String cardNumber, String securityCode, int expirationMonth, int expirationYear) {</span>
+<span class="fc" id="L11">        this.cardHolderName = cardHolderName;</span>
+<span class="fc" id="L12">        this.cardNumber = cardNumber;</span>
+<span class="fc" id="L13">        this.securityCode = securityCode;</span>
+<span class="fc" id="L14">        this.expirationMonth = expirationMonth;</span>
+<span class="fc" id="L15">        this.expirationYear = expirationYear;</span>
+<span class="fc" id="L16">    }</span>
+
+    public boolean makePay(double amount) {
+<span class="fc" id="L19">        System.out.println(&quot;Procesando pago con tarjeta de &quot; + cardHolderName);</span>
+<span class="fc" id="L20">        System.out.println(&quot;Monto: $&quot; + amount + &quot; - Tarjeta: ****&quot; + cardNumber.substring(cardNumber.length() - 4));</span>
+<span class="fc" id="L21">        System.out.println(&quot;Transacción aprobada.&quot;);</span>
+<span class="fc" id="L22">        return true;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

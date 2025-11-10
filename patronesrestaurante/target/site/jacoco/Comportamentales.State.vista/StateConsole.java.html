@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>StateConsole.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Patrones Restaurante</a> &gt; <a href="index.source.html" class="el_package">Comportamentales.State.vista</a> &gt; <span class="el_source">StateConsole.java</span></div><h1>StateConsole.java</h1><pre class="source lang-java linenums">package Comportamentales.State.vista;
+
+import Comportamentales.State.controlador.StateController;
+import Comportamentales.State.modelo.Pedido;
+
+import java.util.Scanner;
+
+<span class="nc" id="L8">public class StateConsole {</span>
+
+    public static void main(String[] args) {
+<span class="nc" id="L11">        Scanner sc = new Scanner(System.in);</span>
+<span class="nc" id="L12">        StateController controller = new StateController();</span>
+
+<span class="nc" id="L14">        boolean continuar = true;</span>
+<span class="nc" id="L15">        System.out.println(&quot;=== SISTEMA DE ESTADOS DE PEDIDOS (State) ===&quot;);</span>
+
+<span class="nc bnc" id="L17" title="All 2 branches missed.">        while (continuar) {</span>
+<span class="nc" id="L18">            System.out.print(&quot;\nIngrese el ID del pedido: &quot;);</span>
+<span class="nc" id="L19">            int id = Integer.parseInt(sc.nextLine());</span>
+
+<span class="nc" id="L21">            System.out.print(&quot;Ingrese la descripción del pedido: &quot;);</span>
+<span class="nc" id="L22">            String descripcion = sc.nextLine();</span>
+
+<span class="nc" id="L24">            Pedido pedido = controller.crearPedido(id, descripcion);</span>
+<span class="nc" id="L25">            System.out.println(&quot;\nPedido creado: &quot; + pedido);</span>
+
+<span class="nc bnc" id="L27" title="All 2 branches missed.">            while (!controller.esPedidoCerrado(pedido)) {</span>
+<span class="nc" id="L28">                System.out.println(&quot;\nPresione ENTER para avanzar al siguiente estado...&quot;);</span>
+<span class="nc" id="L29">                sc.nextLine();</span>
+<span class="nc" id="L30">                controller.avanzarEstado(pedido);</span>
+<span class="nc" id="L31">                System.out.println(&quot;&quot; + pedido);</span>
+            }
+
+<span class="nc" id="L34">            System.out.println(&quot;El pedido ha sido cerrado correctamente.&quot;);</span>
+
+<span class="nc" id="L36">            System.out.print(&quot;\n¿Desea gestionar otro pedido? (si/no): &quot;);</span>
+<span class="nc" id="L37">            String respuesta = sc.nextLine().trim().toLowerCase();</span>
+<span class="nc bnc" id="L38" title="All 2 branches missed.">            if (!respuesta.equals(&quot;si&quot;)) {</span>
+<span class="nc" id="L39">                continuar = false;</span>
+            }
+        }
+
+<span class="nc" id="L43">        System.out.println(&quot;\nSaliendo del sistema de estados...&quot;);</span>
+<span class="nc" id="L44">        sc.close();</span>
+<span class="nc" id="L45">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>BuilderConsole.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Patrones Restaurante</a> &gt; <a href="index.source.html" class="el_package">Creacionales.Builder.vista</a> &gt; <span class="el_source">BuilderConsole.java</span></div><h1>BuilderConsole.java</h1><pre class="source lang-java linenums">package Creacionales.Builder.vista;
+
+import Creacionales.Builder.controlador.BuilderController;
+import Creacionales.Builder.modelo.Dish;
+
+import java.util.Scanner;
+
+<span class="nc" id="L8">public class BuilderConsole {</span>
+    public static void main(String[] args) {
+<span class="nc" id="L10">        Scanner sc = new Scanner(System.in);</span>
+<span class="nc" id="L11">        BuilderController controller = new BuilderController();</span>
+
+<span class="nc" id="L13">        boolean continuar = true;</span>
+<span class="nc bnc" id="L14" title="All 2 branches missed.">        while (continuar) {</span>
+<span class="nc" id="L15">            System.out.println(&quot;\n=== SISTEMA DE COCINA (Builder) ===&quot;);</span>
+<span class="nc" id="L16">            System.out.println(&quot;1. Menú del día&quot;);</span>
+<span class="nc" id="L17">            System.out.println(&quot;2. Menú vegetariano&quot;);</span>
+<span class="nc" id="L18">            System.out.println(&quot;3. Menú gourmet&quot;);</span>
+<span class="nc" id="L19">            System.out.println(&quot;4. Salir&quot;);</span>
+<span class="nc" id="L20">            System.out.print(&quot;Opción: &quot;);</span>
+<span class="nc" id="L21">            int opcion = sc.nextInt(); sc.nextLine();</span>
+
+<span class="nc" id="L23">            Dish dish = null;</span>
+<span class="nc bnc" id="L24" title="All 5 branches missed.">            switch (opcion) {</span>
+<span class="nc" id="L25">                case 1 -&gt; dish = controller.buildDish(&quot;dia&quot;);</span>
+<span class="nc" id="L26">                case 2 -&gt; dish = controller.buildDish(&quot;vegetariano&quot;);</span>
+<span class="nc" id="L27">                case 3 -&gt; dish = controller.buildDish(&quot;gourmet&quot;);</span>
+<span class="nc" id="L28">                case 4 -&gt; continuar = false;</span>
+<span class="nc" id="L29">                default -&gt; System.out.println(&quot;Opción inválida.&quot;);</span>
+            }
+
+<span class="nc bnc" id="L32" title="All 2 branches missed.">            if (dish != null) {</span>
+<span class="nc" id="L33">                System.out.println(&quot;\n&quot; + dish);</span>
+            }
+        }
+
+<span class="nc" id="L37">        System.out.println(&quot;Cierre del sistema de cocina.&quot;);</span>
+<span class="nc" id="L38">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

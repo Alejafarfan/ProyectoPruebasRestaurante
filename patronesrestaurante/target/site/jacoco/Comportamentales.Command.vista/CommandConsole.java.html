@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CommandConsole.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Patrones Restaurante</a> &gt; <a href="index.source.html" class="el_package">Comportamentales.Command.vista</a> &gt; <span class="el_source">CommandConsole.java</span></div><h1>CommandConsole.java</h1><pre class="source lang-java linenums">package Comportamentales.Command.vista;
+
+import Comportamentales.Command.controlador.CommandController;
+import java.util.Scanner;
+
+<span class="nc" id="L6">public class CommandConsole {</span>
+    public static void main(String[] args) {
+<span class="nc" id="L8">        Scanner sc = new Scanner(System.in);</span>
+<span class="nc" id="L9">        CommandController controller = new CommandController();</span>
+
+<span class="nc" id="L11">        boolean continuar = true;</span>
+<span class="nc bnc" id="L12" title="All 2 branches missed.">        while (continuar) {</span>
+<span class="nc" id="L13">            System.out.println(&quot;\n=== SISTEMA DE COMANDOS DE PEDIDOS ===&quot;);</span>
+<span class="nc" id="L14">            System.out.println(&quot;1. Registrar pedido&quot;);</span>
+<span class="nc" id="L15">            System.out.println(&quot;2. Cancelar pedido&quot;);</span>
+<span class="nc" id="L16">            System.out.println(&quot;3. Procesar pago&quot;);</span>
+<span class="nc" id="L17">            System.out.println(&quot;4. Ver estado del sistema&quot;);</span>
+<span class="nc" id="L18">            System.out.println(&quot;5. Salir&quot;);</span>
+<span class="nc" id="L19">            System.out.print(&quot;Opción: &quot;);</span>
+<span class="nc" id="L20">            int op = sc.nextInt(); sc.nextLine();</span>
+
+<span class="nc bnc" id="L22" title="All 6 branches missed.">            switch (op) {</span>
+                case 1 -&gt; {
+<span class="nc" id="L24">                    System.out.print(&quot;Detalles del pedido: &quot;);</span>
+<span class="nc" id="L25">                    String order = sc.nextLine();</span>
+<span class="nc" id="L26">                    controller.clienteSolicita(&quot;registrar&quot;, order);</span>
+                }
+                case 2 -&gt; {
+<span class="nc" id="L29">                    System.out.print(&quot;Pedido a cancelar: &quot;);</span>
+<span class="nc" id="L30">                    String order = sc.nextLine();</span>
+<span class="nc" id="L31">                    controller.clienteSolicita(&quot;cancelar&quot;, order);</span>
+                }
+<span class="nc" id="L33">                case 3 -&gt; controller.clienteSolicita(&quot;pagar&quot;, &quot;&quot;);</span>
+                case 4 -&gt; {
+<span class="nc" id="L35">                    System.out.println(&quot;Pedidos activos: &quot; + controller.getSystem().getActiveOrders());</span>
+<span class="nc" id="L36">                    System.out.println(&quot;Ventas totales: $&quot; + controller.getSystem().getTotalSales());</span>
+                }
+<span class="nc" id="L38">                case 5 -&gt; continuar = false;</span>
+<span class="nc" id="L39">                default -&gt; System.out.println(&quot;Opción inválida.&quot;);</span>
+            }
+        }
+<span class="nc" id="L42">        System.out.println(&quot;Cierre del sistema de comandos.&quot;);</span>
+<span class="nc" id="L43">    }</span>
+}
+
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

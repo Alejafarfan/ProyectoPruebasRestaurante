@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>AdapterPayMethod.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Patrones Restaurante</a> &gt; <a href="index.source.html" class="el_package">Estructurales.Adapter.modelo</a> &gt; <span class="el_source">AdapterPayMethod.java</span></div><h1>AdapterPayMethod.java</h1><pre class="source lang-java linenums">package Estructurales.Adapter.modelo;
+
+import java.util.Date;
+
+public class AdapterPayMethod implements PayMethodInterface {
+
+    private final CreditCardMethod creditCard;
+    private final CashMethod cash;
+    private final TransferMethod transfer;
+
+<span class="fc" id="L11">    public AdapterPayMethod(CreditCardMethod creditCard, CashMethod cash, TransferMethod transfer) {</span>
+<span class="fc" id="L12">        this.creditCard = creditCard;</span>
+<span class="fc" id="L13">        this.cash = cash;</span>
+<span class="fc" id="L14">        this.transfer = transfer;</span>
+<span class="fc" id="L15">    }</span>
+
+    @Override
+    public boolean payMethod(double amount) {
+<span class="fc" id="L19">        System.out.println(&quot;\nEjecutando método de pago...&quot;);</span>
+<span class="fc" id="L20">        boolean result = false;</span>
+
+<span class="pc bpc" id="L22" title="1 of 2 branches missed.">        if (creditCard != null) {</span>
+<span class="fc" id="L23">            result = creditCard.makePay(amount);</span>
+<span class="pc bnc" id="L24" title="All 2 branches missed.">        } else if (cash != null) {</span>
+<span class="nc" id="L25">            result = cash.cashPayAmount(amount);</span>
+<span class="nc bnc" id="L26" title="All 2 branches missed.">        } else if (transfer != null) {</span>
+<span class="nc" id="L27">            result = transfer.transferCash(amount);</span>
+<span class="nc" id="L28">        } else {</span>
+<span class="nc" id="L29">            System.out.println(&quot;No hay método de pago disponible.&quot;);</span>
+        }
+
+<span class="fc" id="L32">        return result;</span>
+    }
+
+    // Métodos de fábrica para construir adaptadores específicos
+    public static AdapterPayMethod withCreditCard(String holder, String number, String cvv, int month, int year) {
+<span class="fc" id="L37">        return new AdapterPayMethod(new CreditCardMethod(holder, number, cvv, month, year), null, null);</span>
+    }
+
+    public static AdapterPayMethod withCash(double received, double required, String transactionId) {
+<span class="nc" id="L41">        return new AdapterPayMethod(null, new CashMethod(received, required, transactionId), null);</span>
+    }
+
+    public static AdapterPayMethod withTransfer(String sender, String receiver, double amount, String id) {
+<span class="nc" id="L45">        return new AdapterPayMethod(null, null, new TransferMethod(sender, receiver, amount, new Date(), id));</span>
+    }
+
+    // 🔹 Aquí va la implementación real del método que te faltaba
+    public boolean pagar(String cliente, double monto, String metodo) {
+<span class="fc" id="L50">        metodo = metodo.toLowerCase().trim();</span>
+
+<span class="fc" id="L52">        System.out.println(&quot;\n=== Procesando pago del cliente: &quot; + cliente + &quot; ===&quot;);</span>
+<span class="fc" id="L53">        System.out.println(&quot;Método: &quot; + metodo + &quot; | Monto: $&quot; + monto);</span>
+
+<span class="fc" id="L55">        boolean resultado = false;</span>
+
+<span class="pc bpc" id="L57" title="3 of 4 branches missed.">        switch (metodo) {</span>
+            case &quot;tarjeta&quot; -&gt; {
+<span class="fc" id="L59">                AdapterPayMethod adapter = AdapterPayMethod.withCreditCard(</span>
+<span class="fc" id="L60">                        cliente, &quot;4111111111111111&quot;, &quot;123&quot;, 12, 2025);</span>
+<span class="fc" id="L61">                resultado = adapter.payMethod(monto);</span>
+            }
+            case &quot;efectivo&quot; -&gt; {
+<span class="nc" id="L64">                AdapterPayMethod adapter = AdapterPayMethod.withCash(</span>
+<span class="nc" id="L65">                        monto, monto, &quot;TX-&quot; + System.currentTimeMillis());</span>
+<span class="nc" id="L66">                resultado = adapter.payMethod(monto);</span>
+            }
+            case &quot;transferencia&quot; -&gt; {
+<span class="nc" id="L69">                AdapterPayMethod adapter = AdapterPayMethod.withTransfer(</span>
+<span class="nc" id="L70">                        &quot;ACC-&quot; + cliente, &quot;ACC-RESTAURANTE&quot;, monto, &quot;TRX-&quot; + System.currentTimeMillis());</span>
+<span class="nc" id="L71">                resultado = adapter.payMethod(monto);</span>
+            }
+            default -&gt; {
+<span class="nc" id="L74">                System.out.println(&quot;Método de pago no reconocido: &quot; + metodo);</span>
+<span class="nc" id="L75">                resultado = false;</span>
+            }
+        }
+
+<span class="pc bpc" id="L79" title="1 of 2 branches missed.">        if (resultado)</span>
+<span class="fc" id="L80">            System.out.println(&quot;Pago exitoso del cliente &quot; + cliente);</span>
+        else
+<span class="nc" id="L82">            System.out.println(&quot;Pago fallido para &quot; + cliente);</span>
+
+<span class="fc" id="L84">        return resultado;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

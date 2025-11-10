@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Inventory.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Patrones Restaurante</a> &gt; <a href="index.source.html" class="el_package">Creacionales.Singleton.modelo</a> &gt; <span class="el_source">Inventory.java</span></div><h1>Inventory.java</h1><pre class="source lang-java linenums">package Creacionales.Singleton.modelo;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class Inventory {
+    private static Inventory instance;
+    private String restaurantName;
+    private int minimumLevel;
+<span class="fc" id="L10">    private final List&lt;ProductoInventario&gt; productos = new ArrayList&lt;&gt;();</span>
+
+<span class="fc" id="L12">    private Inventory() {</span>
+<span class="fc" id="L13">        this.restaurantName = &quot;Restaurante Pikaikukuta&quot;;</span>
+<span class="fc" id="L14">        this.minimumLevel = 5;</span>
+<span class="fc" id="L15">        inicializarInventario();</span>
+<span class="fc" id="L16">    }</span>
+
+    private void inicializarInventario() {
+<span class="fc" id="L19">        productos.add(new ProductoInventario(&quot;Arroz&quot;, 50));</span>
+<span class="fc" id="L20">        productos.add(new ProductoInventario(&quot;Aceite&quot;, 20));</span>
+<span class="fc" id="L21">        productos.add(new ProductoInventario(&quot;Leche&quot;, 30));</span>
+<span class="fc" id="L22">    }</span>
+
+    public static synchronized Inventory getInstance() {
+<span class="fc bfc" id="L25" title="All 2 branches covered.">        if (instance == null) {</span>
+<span class="fc" id="L26">            instance = new Inventory();</span>
+        }
+<span class="fc" id="L28">        return instance;</span>
+    }
+
+    public void registerEntry(String nombre, int cantidad) {
+<span class="fc" id="L32">        ProductoInventario producto = buscarProducto(nombre);</span>
+<span class="pc bpc" id="L33" title="1 of 2 branches missed.">        if (producto != null) {</span>
+<span class="nc" id="L34">            producto.setCantidad(producto.getCantidad() + cantidad);</span>
+<span class="nc" id="L35">        } else {</span>
+<span class="fc" id="L36">            productos.add(new ProductoInventario(nombre, cantidad));</span>
+        }
+<span class="fc" id="L38">    }</span>
+
+    public boolean registerExit(String nombre, int cantidad) {
+<span class="fc" id="L41">        ProductoInventario producto = buscarProducto(nombre);</span>
+<span class="pc bpc" id="L42" title="1 of 4 branches missed.">        if (producto != null &amp;&amp; producto.getCantidad() &gt;= cantidad) {</span>
+<span class="fc" id="L43">            producto.setCantidad(producto.getCantidad() - cantidad);</span>
+<span class="fc" id="L44">            return true;</span>
+        }
+<span class="fc" id="L46">        return false;</span>
+    }
+
+    private ProductoInventario buscarProducto(String nombre) {
+<span class="fc bfc" id="L50" title="All 2 branches covered.">        for (ProductoInventario p : productos) {</span>
+<span class="fc bfc" id="L51" title="All 2 branches covered.">            if (p.getNombre().equalsIgnoreCase(nombre)) {</span>
+<span class="fc" id="L52">                return p;</span>
+            }
+        }
+<span class="fc" id="L55">        return null;</span>
+    }
+
+    public List&lt;ProductoInventario&gt; getProductos() {
+<span class="nc" id="L59">        return new ArrayList&lt;&gt;(productos);</span>
+    }
+
+    public void showInventory() {
+<span class="nc" id="L63">        System.out.println(&quot;\n=== INVENTARIO ===&quot;);</span>
+<span class="nc bnc" id="L64" title="All 2 branches missed.">        for (ProductoInventario p : productos) {</span>
+<span class="nc" id="L65">            System.out.println(p);</span>
+        }
+<span class="nc" id="L67">    }</span>
+
+<span class="nc" id="L69">    public String getRestaurantName() { return restaurantName; }</span>
+<span class="nc" id="L70">    public void setRestaurantName(String restaurantName) { this.restaurantName = restaurantName; }</span>
+<span class="nc" id="L71">    public int getMinimumLevel() { return minimumLevel; }</span>
+<span class="nc" id="L72">    public void setMinimumLevel(int minimumLevel) { this.minimumLevel = minimumLevel; }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>
